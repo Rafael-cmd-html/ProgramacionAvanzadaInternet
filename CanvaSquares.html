@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title> Rectangulos en picada </title>
+
+    </head>
+    <style>
+
+        #canvas{
+
+            width: 700px;
+            height: 700px;
+            border: 1px solid black 
+            
+        }
+
+    </style>
+    <body>
+
+        <canvas id="canvas"></canvas>
+
+    </body>
+    <script>
+
+        var canvas=document.getElementById('canvas');
+
+        var rectangulo1= canvas.getContext('2d');
+        var rectangulo2= canvas.getContext('2d');
+        var rectangulo3= canvas.getContext('2d');
+
+        //Permite llenar el rectangulo con el color.
+        rectangulo1.fillStyle="#A22F16";
+        rectangulo1.fillRect(10,10,30,15);
+        rectangulo2.fillStyle="#3F8810";
+        rectangulo2.fillRect(30,20,30,15);
+        rectangulo3.fillStyle="#107088";
+        rectangulo3.fillRect(55,30,30,15); 
+        //Da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
+    </script>
+
+</html>
