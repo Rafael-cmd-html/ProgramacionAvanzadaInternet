@@ -30,14 +30,55 @@
         var rectangulo2= canvas.getContext('2d');
         var rectangulo3= canvas.getContext('2d');
 
-        //Permite llenar el rectangulo con el color.
+        //FillStyle permite llenar el rectangulo con el color.
+        //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
+
         rectangulo1.fillStyle="#A22F16";
         rectangulo1.fillRect(10,10,30,15);
+
         rectangulo2.fillStyle="#3F8810";
         rectangulo2.fillRect(30,20,30,15);
+
         rectangulo3.fillStyle="#107088";
         rectangulo3.fillRect(55,30,30,15); 
-        //Da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
+
+        //Creación de triangulo y linea
+
+        var linea= canvas.getContext('2d');
+
+        linea.moveTo(50,100);
+        linea.lineTo(125,65);
+        linea.strokeStyle="red";
+        linea.stroke();
+
+        //-------
+
+        var triangulo= canvas.getContext('2d');
+        triangulo.strokeStyle = "#212121";
+        triangulo.fillStyle = "green";
+
+        triangulo.moveTo(200, 50);
+        triangulo.lineTo(200, 100);
+        triangulo.lineTo(250, 100);
+
+        triangulo.closePath();
+        triangulo.stroke();
+        triangulo.fill();
+
+        //Creación de circulos
+
+        var circuloVacio = canvas.getContext("2d");
+
+        circuloVacio.beginPath();
+        circuloVacio.arc(70, 130, 15, 0, 2 * Math.PI);
+        circuloVacio.stroke();
+        
+        var circuloRelleno = canvas.getContext("2d");
+
+        circuloRelleno.beginPath();
+        circuloRelleno.arc(120, 130, 15, 0, 2 * Math.PI);
+        circuloRelleno.fillStyle="blue";
+        circuloRelleno.fill();
     </script>
 
 </html>
