@@ -26,60 +26,66 @@
 
         var canvas=document.getElementById('canvas');
 
-        var rectangulo1= canvas.getContext('2d');
-        var rectangulo2= canvas.getContext('2d');
-        var rectangulo3= canvas.getContext('2d');
+        var contexto= canvas.getContext('2d');
 
         //FillStyle permite llenar el rectangulo con el color.
         //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
 
-        rectangulo1.fillStyle="#A22F16";
-        rectangulo1.fillRect(10,10,30,15);
+        contexto.fillStyle="#A22F16";
+        contexto.fillRect(10,10,30,15);
 
-        rectangulo2.fillStyle="#3F8810";
-        rectangulo2.fillRect(30,20,30,15);
+        contexto.fillStyle="#3F8810";
+        contexto.fillRect(30,20,30,15);
 
-        rectangulo3.fillStyle="#107088";
-        rectangulo3.fillRect(55,30,30,15); 
+        contexto.fillStyle="#107088";
+        contexto.fillRect(55,30,30,15); 
 
         //Creación de triangulo y linea
 
-        var linea= canvas.getContext('2d');
-
-        linea.moveTo(50,100);
-        linea.lineTo(125,65);
-        linea.strokeStyle="red";
-        linea.stroke();
+        contexto.moveTo(50,100);
+        contexto.lineTo(125,65);
+        contexto.strokeStyle="red";
+        contexto.stroke();
 
         //-------
         // Prueba de gitDesktop.
 
-        var triangulo= canvas.getContext('2d');
-        triangulo.strokeStyle = "#212121";
-        triangulo.fillStyle = "green";
+        contexto.strokeStyle = "#212121";
+        contexto.fillStyle = "green";
 
-        triangulo.moveTo(200, 50);
-        triangulo.lineTo(200, 100);
-        triangulo.lineTo(250, 100);
+        contexto.moveTo(200, 50);
+        contexto.lineTo(200, 100);
+        contexto.lineTo(250, 100);
 
-        triangulo.closePath();
-        triangulo.stroke();
-        triangulo.fill();
+        contexto.closePath();
+        contexto.stroke();
+        contexto.fill();
 
         //Creación de circulos
 
-        var circuloVacio = canvas.getContext("2d");
-
-        circuloVacio.beginPath();
-        circuloVacio.arc(70, 130, 15, 0, 2 * Math.PI);
-        circuloVacio.stroke();
+        contexto.beginPath();
+        contexto.arc(70, 130, 15, 0, 2 * Math.PI);
+        contexto.stroke();
+        contexto.closePath();
         
-        var circuloRelleno = canvas.getContext("2d");
+        contexto.beginPath();
+        contexto.arc(120, 130, 15, 0, 2 * Math.PI);
+        contexto.fillStyle="blue";
+        contexto.fill();
+        contexto.closePath();
 
-        circuloRelleno.beginPath();
-        circuloRelleno.arc(120, 130, 15, 0, 2 * Math.PI);
-        circuloRelleno.fillStyle="blue";
-        circuloRelleno.fill();
+        //Filltext 
+        contexto.beginPath();
+        contexto.fillStyle="black";
+        contexto.font= "10px Arial";
+        contexto.fillText("Hola mundo",100,50);
+
+        contexto.strokeStyle="red";
+        contexto.strokeText("Hola mundo", 103,53);
+
+        //Gradiant
+        //RadioGradiant
+        //Imagen
     </script>
 
 </html>
