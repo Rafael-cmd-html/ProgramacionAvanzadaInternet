@@ -3,15 +3,12 @@
 
     <head>
 
-        <title> Rectangulos en picada </title>
+        <title> Principios de canva</title>
 
     </head>
     <style>
 
         #canvas{
-
-            width: 700px;
-            height: 700px;
             border: 1px solid black 
             
         }
@@ -19,7 +16,7 @@
     </style>
     <body>
 
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" width=500px height= 500px></canvas>
 
     </body>
     <script>
@@ -84,6 +81,13 @@
         contexto.strokeText("Hola mundo", 103,53);
 
         //Gradiant
+        var grd = contexto.createLinearGradient(0, 0, 300, 0);
+        grd.addColorStop(0, "black");
+        grd.addColorStop(1, "red");
+
+        // Draw a filled Rectangle
+        contexto.fillStyle = grd;
+        contexto.fillRect(180,110,200,110);
         //RadioGradiant
         //Imagen
     </script>
