@@ -5,98 +5,103 @@
 
         <title> Principios de canva</title>
 
+        <style>
+
+            #canvas{
+                border: 1px solid black 
+                
+            }
+    
+        </style>
     </head>
-    <style>
-
-        #canvas{
-            border: 1px solid black 
-            
-        }
-
-    </style>
     <body>
 
-        <canvas id="canvas" width=500px height= 500px></canvas>
+
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <img  style="display: none;" src="konkun.png" id="my_image">
+        <script>
+
+            var canvas=document.getElementById('canvas');
+    
+            var contexto= canvas.getContext('2d');
+    
+            //FillStyle permite llenar el rectangulo con el color.
+            //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
+    
+            contexto.fillStyle="#A22F16";
+            contexto.fillRect(10,10,30,15);
+    
+            contexto.fillStyle="#3F8810";
+            contexto.fillRect(30,20,30,15);
+    
+            contexto.fillStyle="#107088";
+            contexto.fillRect(55,30,30,15); 
+    
+            //Creación de triangulo y linea
+    
+            contexto.moveTo(50,100);
+            contexto.lineTo(125,65);
+            contexto.strokeStyle="red";
+            contexto.stroke();
+    
+            //-------
+            // Prueba de gitDesktop.
+    
+            contexto.strokeStyle = "#212121";
+            contexto.fillStyle = "green";
+    
+            contexto.moveTo(200, 50);
+            contexto.lineTo(200, 100);
+            contexto.lineTo(250, 100);
+    
+            contexto.closePath();
+            contexto.stroke();
+            contexto.fill();
+    
+            //Creación de circulos
+    
+            contexto.beginPath();
+            contexto.arc(70, 130, 15, 0, 2 * Math.PI);
+            contexto.stroke();
+            contexto.closePath();
+            
+            contexto.beginPath();
+            contexto.arc(120, 130, 15, 0, 2 * Math.PI);
+            contexto.fillStyle="blue";
+            contexto.fill();
+            contexto.closePath();
+    
+            //Filltext 
+            contexto.beginPath();
+            contexto.fillStyle="black";
+            contexto.font= "10px Arial";
+            contexto.fillText("Hola mundo",100,50);
+    
+            contexto.strokeStyle="red";
+            contexto.strokeText("Hola mundo", 103,53);
+    
+            //Gradiant
+            var grd = contexto.createLinearGradient(0, 0, 300, 0);
+            grd.addColorStop(0, "black");
+            grd.addColorStop(1, "red");
+    
+            // Draw a filled Rectangle
+            contexto.fillStyle = grd;
+            contexto.fillRect(180,110,200,110);
+            //RadioGradiant
+            var grd2 = contexto.createRadialGradient(75, 170, 5, 90, 170, 80);
+            grd2.addColorStop(0, "blue");
+            grd2.addColorStop(1, "white");
+    
+    
+            contexto.fillStyle = grd2;
+            contexto.fillRect(10, 110, 150, 110);
+    
+            //Imagen
+            var img = document.getElementById("my_image");
+            contexto.drawImage(img, 10, 250);
+        </script>
 
     </body>
-    <script>
-
-        var canvas=document.getElementById('canvas');
-
-        var contexto= canvas.getContext('2d');
-
-        //FillStyle permite llenar el rectangulo con el color.
-        //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
-
-        contexto.fillStyle="#A22F16";
-        contexto.fillRect(10,10,30,15);
-
-        contexto.fillStyle="#3F8810";
-        contexto.fillRect(30,20,30,15);
-
-        contexto.fillStyle="#107088";
-        contexto.fillRect(55,30,30,15); 
-
-        //Creación de triangulo y linea
-
-        contexto.moveTo(50,100);
-        contexto.lineTo(125,65);
-        contexto.strokeStyle="red";
-        contexto.stroke();
-
-        //-------
-        // Prueba de gitDesktop.
-
-        contexto.strokeStyle = "#212121";
-        contexto.fillStyle = "green";
-
-        contexto.moveTo(200, 50);
-        contexto.lineTo(200, 100);
-        contexto.lineTo(250, 100);
-
-        contexto.closePath();
-        contexto.stroke();
-        contexto.fill();
-
-        //Creación de circulos
-
-        contexto.beginPath();
-        contexto.arc(70, 130, 15, 0, 2 * Math.PI);
-        contexto.stroke();
-        contexto.closePath();
-        
-        contexto.beginPath();
-        contexto.arc(120, 130, 15, 0, 2 * Math.PI);
-        contexto.fillStyle="blue";
-        contexto.fill();
-        contexto.closePath();
-
-        //Filltext 
-        contexto.beginPath();
-        contexto.fillStyle="black";
-        contexto.font= "10px Arial";
-        contexto.fillText("Hola mundo",100,50);
-
-        contexto.strokeStyle="red";
-        contexto.strokeText("Hola mundo", 103,53);
-
-        //Gradiant
-        var grd = contexto.createLinearGradient(0, 0, 300, 0);
-        grd.addColorStop(0, "black");
-        grd.addColorStop(1, "red");
-
-        // Draw a filled Rectangle
-        contexto.fillStyle = grd;
-        contexto.fillRect(180,110,200,110);
-        //RadioGradiant
-        var grd2 = contexto.createRadialGradient(75, 170, 5, 90, 170, 80);
-        grd2.addColorStop(0, "blue");
-        grd2.addColorStop(1, "white");
-
-
-        contexto.fillStyle = grd2;
-        contexto.fillRect(10, 110, 150, 110);
-        //Imagen
-    </script>
-
+    
 </html>
