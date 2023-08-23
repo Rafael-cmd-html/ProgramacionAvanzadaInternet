@@ -120,9 +120,15 @@
                     break;
 
                 }
+                resetCanvas();
                 paintSquare();
 
             });
+            function resetCanvas(){
+
+                    contexto.clearRect(0, 0, canvas.height, canvas.width);
+
+            }
             function paintSquare(){
        
                 contexto.fillStyle=random_rgba();
