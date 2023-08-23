@@ -25,6 +25,7 @@
     
             var contexto= canvas.getContext('2d');
 
+            /*
             var figura= true;
 
             var press= false;
@@ -90,7 +91,23 @@
                 return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
 
             }
-    
+            */
+
+            //Eventos de teclado
+
+            var x=10, y=10;
+            document.addEventListener("keydown", (e) => {
+
+                
+
+            });
+            function paintSquare(){
+       
+                contexto.fillStyle="#A22F16";
+                contexto.fillRect(x,y,80,85)
+
+            }
+
             //FillStyle permite llenar el rectangulo con el color.
             //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
             
