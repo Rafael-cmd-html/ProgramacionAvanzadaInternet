@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <style>
+
+            #canvas{
+
+                border: 1px solid black 
+                
+            }
+    
+        </style>
+
+    </head>
+    <body>
+
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <script>
+
+            var canvas=document.getElementById('canvas');
+    
+            var contexto= canvas.getContext('2d');
+
+            //Tronco kirby
+            contexto.beginPath();
+            contexto.arc(250, 250, 100, 0, 2 * Math.PI);
+
+            contexto.fillStyle="#e791bf";
+            contexto.fill();
+
+            contexto.closePath();
+
+            //Brazos
+            dibujarOvalos(180,250,"#e791bf" );
+
+            dibujarOvalos(70,250,"#e791bf" );
+
+            //Pies
+
+
+            function dibujarOvalos(x,y,color){
+
+                contexto.scale(2,1);
+                contexto.arc( x, y, 25, 0, 2 * Math.PI );
+
+                contexto.fillStyle=color;
+                contexto.fill();
+
+            }
+
+
+        </script>
+
+    </body>
+</html>
