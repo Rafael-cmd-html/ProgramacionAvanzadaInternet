@@ -29,25 +29,41 @@
             contexto.fillStyle="#e791bf";
             contexto.fill();
 
-            contexto.closePath();
-
-            //Brazos
-            dibujarOvalos(180,250,"#e791bf" );
-
-            dibujarOvalos(70,250,"#e791bf" );
-
-            //Pies
+            //Scale permite aplastar el circulo, invertirlo etc
+            contexto.scale(2,1);
 
 
-            function dibujarOvalos(x,y,color){
+            function dibujarOvalos(x,y,z,color){
 
-                contexto.scale(2,1);
-                contexto.arc( x, y, 25, 0, 2 * Math.PI );
-
+                contexto.arc( x ,y, z, 0, 2 * Math.PI );
                 contexto.fillStyle=color;
                 contexto.fill();
 
             }
+            //Brazos
+            dibujarOvalos(80,250,25,"#e791bf");
+            dibujarOvalos(170,250,25, "#e791bf");
+            contexto.closePath();
+
+            //Pies
+            contexto.beginPath();
+            dibujarOvalos(100,340,20,"#d74894");
+            dibujarOvalos(150,340,20,"#d74894");
+            contexto.closePath();
+
+            //Mejillas
+            contexto.beginPath();
+            dibujarOvalos(100,255,10,"rgba(223,109,169,0.7)");
+            dibujarOvalos(150,255,10,"rgba(223,109,169,0.7)");
+            contexto.closePath();
+
+            //Ojos
+            contexto.beginPath();
+            contexto.ellipse(100, 235, 50, 80, 360, 0, Math.PI*2);
+            contexto.fillStyle="black";
+            contexto.fill();
+            contexto.closePath();
+
 
 
         </script>
