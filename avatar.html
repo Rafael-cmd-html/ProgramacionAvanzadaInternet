@@ -22,13 +22,14 @@
     
             var contexto= canvas.getContext('2d');
 
+            contexto.fillStyle = "#1A5276";
+            contexto.fillRect(0, 0, canvas.width, canvas.height);
             //Tronco kirby
             contexto.beginPath();
             contexto.arc(250, 250, 100, 0, 2 * Math.PI);
 
             contexto.fillStyle="#e791bf";
             contexto.fill();
-
             //Scale permite aplastar el circulo, invertirlo etc
             contexto.scale(2,1);
 
@@ -36,6 +37,13 @@
             function dibujarOvalos(x,y,z,color){
 
                 contexto.arc( x ,y, z, 0, 2 * Math.PI );
+                contexto.fillStyle=color;
+                contexto.fill();
+
+            }
+            function dibujarElipseVertical(x,y,z,w,color){
+
+                contexto.ellipse(x,y, z, w, 0, 0, Math.PI*2);
                 contexto.fillStyle=color;
                 contexto.fill();
 
@@ -58,11 +66,38 @@
             contexto.closePath();
 
             //Ojos
+            //Parte azul
             contexto.beginPath();
-            contexto.ellipse(100, 235, 50, 80, 360, 0, Math.PI*2);
-            contexto.fillStyle="black";
-            contexto.fill();
+            dibujarElipseVertical(115,220,5,20, "#0A56B2");
             contexto.closePath();
+
+            contexto.beginPath();
+            dibujarElipseVertical(135,220,5,20, "#0A56B2");
+            contexto.closePath();
+
+            //Parte negra
+            contexto.beginPath();
+            dibujarElipseVertical(115,215,5,15, "#000000");
+            contexto.closePath();
+            
+            contexto.beginPath();
+            dibujarElipseVertical(135,215,5,15, "#000000");
+            contexto.closePath();
+
+            //Brillo
+            contexto.beginPath();
+            dibujarElipseVertical(115,210,2,5, "#FFFFFF");
+            contexto.closePath();
+
+            contexto.beginPath();
+            dibujarElipseVertical(135,210,2,5, "#FFFFFF");
+            contexto.closePath();
+
+            //Sonrisa
+            
+            contexto.beginPath();
+            dibujarElipseVertical(125,270,2,5,"#d74894");
+
 
 
 
