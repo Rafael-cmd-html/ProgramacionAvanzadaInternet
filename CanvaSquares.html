@@ -24,7 +24,127 @@
             var canvas=document.getElementById('canvas');
     
             var contexto= canvas.getContext('2d');
+ 
+            
+            contexto.fillStyle = "black";
+            contexto.fill();
 
+            function random_rgba() {
+
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+
+            }
+
+            //Eventos de teclado
+
+            var x=250, y=250, dir=0;
+            paintSquare();
+            document.addEventListener("keydown", (e) => {
+
+                /*x=Math.floor(Math.random() * 500);
+                y=Math.floor(Math.random() * 500);*/
+                
+
+                //Arriba 87
+                //Abajo 83
+                //Izquierda 65
+                //Derecha 68
+
+
+                switch(e.keyCode){
+
+                    case 87: dir=1;
+                    break;
+                    case 83: dir=2;
+                    break;
+                    case 65: dir=4;
+                    break;
+                    case 68: dir=3;
+                    break;
+
+                }
+                //update();
+                paintSquare();
+                console.log("Hola");
+                console.log(dir);
+
+            });
+            
+            
+            function resetCanvas(){
+
+                    contexto.clearRect(0, 0, canvas.height, canvas.width);
+
+            }
+            function paintSquare(){
+       
+                contexto.fillStyle=random_rgba();
+                contexto.fillRect(x,y,80,85)
+
+            }
+            
+            function update(){
+
+                    if(dir==1){
+
+
+                        y-=10;
+                        if(y<0){
+
+                            y=500;
+
+                        }
+
+
+                    }else if(dir==2){
+
+                        y+=10;
+                        if(y>500){
+
+                            y=0;
+
+                        }
+
+                    }else if(dir==3){
+
+                        x-=10;
+                        
+                        if(x<0){
+
+                            x=500;
+
+                        }
+                    }
+                    else if(dir==4){
+
+                        x+=10;
+                        if(x>500){
+
+                            x=0;
+
+                        }
+
+                    }
+
+                resetCanvas();
+                paintSquare();
+                window.requestAnimationFrame(update);
+
+            }
+            window.requestAnimationFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 17);
+                    };
+            }());
+            window.requestAnimationFrame(update);
+
+            //FillStyle permite llenar el rectangulo con el color.
+            //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
+            
             /*
             var figura= true;
 
@@ -85,60 +205,6 @@
             })
             */
 
-
-            function random_rgba() {
-
-                var o = Math.round, r = Math.random, s = 255;
-                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-
-            }
-
-            //Eventos de teclado
-
-            var x=250, y=250;
-            document.addEventListener("keydown", (e) => {
-
-                /*x=Math.floor(Math.random() * 500);
-                y=Math.floor(Math.random() * 500);*/
-                
-
-                //Arriba 87
-                //Abajo 83
-                //Izquierda 65
-                //Derecha 68
-
-
-                switch(e.keyCode){
-
-                    case 87: y-=10;
-                    break;
-                    case 83: y+=10;
-                    break;
-                    case 65: x-=10;
-                    break;
-                    case 68: x+=10;
-                    break;
-
-                }
-                resetCanvas();
-                paintSquare();
-
-            });
-            function resetCanvas(){
-
-                    contexto.clearRect(0, 0, canvas.height, canvas.width);
-
-            }
-            function paintSquare(){
-       
-                contexto.fillStyle=random_rgba();
-                contexto.fillRect(x,y,80,85)
-
-            }
-
-            //FillStyle permite llenar el rectangulo con el color.
-            //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
-            
             /*
             contexto.fillStyle="#A22F16";
             contexto.fillRect(10,10,30,15);
