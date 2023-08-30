@@ -1,4 +1,37 @@
 <!DOCTYPE html>
 <html>
+
+    <head>       
+        <style>
+
+            #canvas{
+                border: 1px solid black 
+                
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <script>
+
+            var canvas=document.getElementById('canvas');
+            var contexto= canvas.getContext('2d');
+
+
+            var grd2 = contexto.createRadialGradient(250, 540, 40, 250, 540, 700);
+            grd2.addColorStop(0, "rgba(255,215,0)");
+            grd2.addColorStop(0.9, "rgba(255,182,193)");
+            grd2.addColorStop(1, "rgba(255,258,225)");
+    
+    
+            contexto.fillStyle = grd2;
+            contexto.fillRect(0, 0, canvas.width, canvas.height);
+
+        </script>
+
+    </body>
     
 </html>
