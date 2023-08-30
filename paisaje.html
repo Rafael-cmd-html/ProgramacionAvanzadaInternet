@@ -21,14 +21,86 @@
             var contexto= canvas.getContext('2d');
 
 
-            var grd2 = contexto.createRadialGradient(250, 540, 40, 250, 540, 700);
-            grd2.addColorStop(0, "rgba(255,215,0)");
-            grd2.addColorStop(0.9, "rgba(255,182,193)");
-            grd2.addColorStop(1, "rgba(255,258,225)");
+            var grd2 = contexto.createRadialGradient(250, 535, 40, 250, 535, 700);
+            grd2.addColorStop(1, "rgba(255,215,0)");
+            grd2.addColorStop(0, "rgba(255,182,193)");
     
     
             contexto.fillStyle = grd2;
             contexto.fillRect(0, 0, canvas.width, canvas.height);
+
+            contexto.beginPath();
+            dibujarCirculos(450,250,70);
+            contexto.closePath();
+
+            var grd = contexto.createLinearGradient(0,70, 70, 0);
+            grd.addColorStop(0, "#2E82C3");
+            grd.addColorStop(1, "#73BBF3");
+    
+            contexto.fillStyle = grd;
+            contexto.fillRect(0,285,500,215);
+
+            contexto.beginPath();
+
+            contexto.arc(100, 100, 15, 0, Math.PI, true); 
+            contexto.moveTo(65, 65);
+            contexto.strokeStyle="black";
+            contexto.stroke();
+
+            contexto.closePath();        
+
+            contexto.beginPath();
+
+            contexto.arc(70, 100, 15, 0, Math.PI, true); 
+            contexto.moveTo(65, 65);
+            contexto.strokeStyle="black";
+            contexto.stroke();
+
+            contexto.closePath();
+
+            contexto.beginPath();
+
+            contexto.arc(130, 130, 15, 0, Math.PI, true); 
+            contexto.moveTo(65, 65);
+            contexto.strokeStyle="black";
+            contexto.stroke();
+
+            contexto.closePath();        
+
+            contexto.beginPath();
+
+            contexto.arc(100, 130, 15, 0, Math.PI, true); 
+            contexto.moveTo(65, 65);
+            contexto.strokeStyle="black";
+            contexto.stroke();
+
+            contexto.closePath();
+              
+
+            contexto.beginPath();
+
+            contexto.arc(270, 130, 15, 0, Math.PI, true); 
+            contexto.moveTo(65, 65);
+            contexto.strokeStyle="black";
+            contexto.stroke();
+
+            contexto.closePath();
+            contexto.beginPath();
+
+            contexto.arc(240, 130, 15, 0, Math.PI, true); 
+            contexto.moveTo(65, 65);
+            contexto.strokeStyle="black";
+            contexto.stroke();
+
+            contexto.closePath();
+
+            function dibujarCirculos(x,y,r){   
+
+                contexto.arc(x, y, r, 0, 2 * Math.PI);    
+                contexto.fillStyle="rgba(247,111,55,0.5)";
+                contexto.fill();
+
+            }
 
         </script>
 
