@@ -24,11 +24,7 @@
             var canvas=document.getElementById('canvas');
     
             var contexto= canvas.getContext('2d');
- 
-            
-            contexto.fillStyle = "black";
-            contexto.fill();
-
+     
             function random_rgba() {
 
                 var o = Math.round, r = Math.random, s = 255;
@@ -38,7 +34,12 @@
 
             //Eventos de teclado
 
-            var x=250, y=250, dir=0;
+            
+            var x=250, y=250, dir=0, w=80, h=85, t_x=10,t_y=10,t_w=40,t_h=40;
+
+            contexto.fillStyle="black"
+            contexto.fillRect(t_x,t_y,t_w,t_h);
+
             paintSquare();
             document.addEventListener("keydown", (e) => {
 
@@ -51,23 +52,23 @@
                 //Izquierda 65
                 //Derecha 68
 
-
                 switch(e.keyCode){
 
                     case 87: dir=1;
                     break;
                     case 83: dir=2;
                     break;
-                    case 65: dir=4;
+                    case 65: dir=3;
                     break;
-                    case 68: dir=3;
+                    case 68: dir=4;
                     break;
 
                 }
                 //update();
                 paintSquare();
-                console.log("Hola");
-                console.log(dir);
+                contexto.fillStyle="black"
+                contexto.fillRect(10,10,40,40);
+
 
             });
             
@@ -80,7 +81,7 @@
             function paintSquare(){
        
                 contexto.fillStyle=random_rgba();
-                contexto.fillRect(x,y,80,85)
+                contexto.fillRect(x,y,w,h)
 
             }
             
@@ -129,7 +130,17 @@
 
                 resetCanvas();
                 paintSquare();
+                contexto.fillStyle="black"
+                contexto.fillRect(t_x,t_y,t_w,t_h);
+
                 window.requestAnimationFrame(update);
+                if(x < t_x + t_w &&  x + w > t_x &&    y < t_y + t_h &&    y + h > t_y){
+
+
+                    t_x=Math.floor(Math.random() * canvas.width);
+                    t_y=Math.floor(Math.random() * canvas.height);
+
+                }
 
             }
             window.requestAnimationFrame = (function () {
