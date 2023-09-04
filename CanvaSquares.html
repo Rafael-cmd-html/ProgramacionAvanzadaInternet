@@ -35,10 +35,13 @@
             //Eventos de teclado
 
             
-            var x=250, y=250, dir=0, w=80, h=85, t_x=10,t_y=10,t_w=40,t_h=40;
+            var x=250, y=250, dir=0, w=80, h=85, t_x=100,t_y=200,t_w=40,t_h=40, o_x=110, o_y=50, o_w=270, o_h=30;
 
             contexto.fillStyle="black"
             contexto.fillRect(t_x,t_y,t_w,t_h);
+
+            contexto.fillStyle="gray"
+            contexto.fillRect(o_x,o_y, o_w, o_h);
 
             paintSquare();
             document.addEventListener("keydown", (e) => {
@@ -132,16 +135,62 @@
                 paintSquare();
                 contexto.fillStyle="black"
                 contexto.fillRect(t_x,t_y,t_w,t_h);
+                
+                contexto.fillStyle="gray"
+                contexto.fillRect(o_x,o_y, o_w, o_h);
+
 
                 window.requestAnimationFrame(update);
                 if(x < t_x + t_w &&  x + w > t_x &&    y < t_y + t_h &&    y + h > t_y){
-
 
                     t_x=Math.floor(Math.random() * canvas.width);
                     t_y=Math.floor(Math.random() * canvas.height);
 
                 }
+                
+                if(x < o_x + o_w &&  x + w > o_x &&    y < o_y + o_h &&    y + h > o_y){ 
+                    if(dir==1){
 
+
+                        y+=10;
+                        if(y<o_y){
+
+                            y=o_h;
+
+                        }
+
+
+                    }else if(dir==2){
+
+                        y-=10;
+                        if(y>o_h){
+
+                            y=o_y;
+
+                        }
+
+                    }else if(dir==3){
+
+                        x+=10;
+                        
+                        if(x<o_x){
+
+                            x=o_w;
+
+                        }
+                    }
+                    else if(dir==4){
+
+                        x-=10;
+                        if(x>o_w){
+
+                            x=o_x;
+
+                        }
+
+                    }
+
+                }
             }
             window.requestAnimationFrame = (function () {
                 return window.requestAnimationFrame ||
