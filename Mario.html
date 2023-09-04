@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <style>
+
+            #canvas{
+
+                border: 1px solid black 
+                
+            }
+    
+        </style>
+
+    </head>
+    <body>
+        <canvas id="canvas" width="900" height="500"></canvas>
+        <script> 
+
+            var canvas=document.getElementById('canvas');
+    
+            var contexto= canvas.getContext('2d');
+
+            contexto.fillStyle = "#A9DAFF";
+            contexto.fillRect(0, 0, canvas.width, canvas.height);
+
+            crearRectangulos(0,450,canvas.width,50,"#EA9A53");
+            crearRectangulos(0,440,canvas.width, 15, "#AD5A10" );
+
+            crearRectangulos(200,140,200,300,"#0E8DD1");
+            contexto.strokeRect(200,140,200,300);
+
+            crearRectangulos(100,240, 200,200, "#EC917F");
+            contexto.strokeRect(100,240,200,200);
+
+            crearRectangulos(300,240,20,200,"black");
+            crearRectangulos(289,240,10,200,"#DF6E57");
+            crearRectangulos(99,430,200,10,"#DF6E57");
+
+            crearRectangulos(400,140,20,300,"black");
+            crearRectangulos(389,140,10,300, "#0876B1");
+            crearRectangulos(320,430,70,10, "#0876B1");
+
+            crearCirculos(220,155,10);
+            crearStrokeCircular(220,155,10);
+
+            crearCirculos(380,155,10);
+            crearStrokeCircular(380,155,10);
+
+            crearCirculos(380,410,10);
+            crearStrokeCircular(380,410,10);
+
+            crearCirculos(120,260,10);
+            crearStrokeCircular(120,260,10); 
+
+            crearCirculos(270,260,10);
+            crearStrokeCircular(270,260,10);
+            
+            crearCirculos(270,415,10);
+            crearStrokeCircular(270,415,10);
+            
+            crearCirculos(120,415,10);
+            crearStrokeCircular(120,415,10);
+
+            crearRectangulos(700,240,300,200,"#64EE62");
+            contexto.strokeRect(700,240,300,200);
+
+            crearRectangulos(700,430,200,10,"#169814");
+            
+            crearCirculos(730,260,10);
+            crearStrokeCircular(730,260,10); 
+            crearCirculos(730,410,10);
+            crearStrokeCircular(730,410,10);
+
+            crearRectangulos(500,330,100,110,"#0A8608");
+            crearRectangulos(500,330,30,110,"#64EE62");
+            crearRectangulos(500,330,15,110,"#58D156");
+            
+            contexto.strokeRect(500,330,100,110,);
+
+            crearRectangulos(490,290,119,40,"#0A8608");
+            contexto.strokeRect(490,290,119,40);
+
+            crearRectangulos(490,290,35,40,"#64EE62");
+            crearRectangulos(490,290,15,40,"#58D156");
+
+            crearRectangulos(40,150,60,60, "#D8881B");
+            contexto.strokeRect(40,150,60,60);
+
+            crearRectangulos(140,20,60,60, "#D8881B");
+            contexto.strokeRect(140,20,60,60);
+
+            function crearRectangulos(x,y,w,h,color){
+
+                contexto.fillStyle=color;
+                contexto.fillRect(x,y,w,h,color);
+
+            }
+
+            function crearCirculos(x,y,z){
+
+                contexto.beginPath();
+                contexto.arc(x, y, z, 0, 2 * Math.PI);
+                contexto.fillStyle="#ACC9D8";
+                contexto.fill();
+                contexto.closePath();
+
+            }
+            function crearStrokeCircular(x,y,z){
+
+                contexto.beginPath();
+                contexto.arc(x, y, z, 0, 2 * Math.PI);
+                contexto.stroke();
+                contexto.closePath();
+
+
+            }
+        </script>
+    </body>

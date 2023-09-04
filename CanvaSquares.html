@@ -24,37 +24,54 @@
             var canvas=document.getElementById('canvas');
     
             var contexto= canvas.getContext('2d');
-     
-            function random_rgba() {
+            class Entidades {
 
-                var o = Math.round, r = Math.random, s = 255;
-                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+                x;
+                y;
+                w;
+                h;
+                constructor(x,y,w,h){
+
+                    this.x=x;
+                    this.y=y;
+                    this.w=w;
+                    this.h=h;
+
+                }   
+                paint(color){
+
+                    contexto.fillStyle=color;
+                    contexto.fillRect(this.x,this.y,this.w,this.h);
+
+                }
+                detectarColision(t_x, t_y, t_w, t_h){
+
+                    if(this.x < t_x + t_w  &&  this.x + this.w > t_x &&    this.y < t_y + t_h  &&  this.y + this.h > t_y) {
+
+                        return true;
+
+                    }
+                }
 
             }
 
-            //Eventos de teclado
+            player= new Entidades(250,250,60,60);
+            target= new Entidades(200,250,30,30);
+            let obstaculos = [];
+            obstaculos.push(new Entidades(50, 90, 400, 30));
+            obstaculos.push(new Entidades(50, 350, 400, 30));
 
-            
-            var x=250, y=250, dir=0, w=80, h=85, t_x=100,t_y=200,t_w=40,t_h=40, o_x=110, o_y=50, o_w=270, o_h=30;
+            for(var i=0; i<obstaculos.length; i++){
 
-            contexto.fillStyle="black"
-            contexto.fillRect(t_x,t_y,t_w,t_h);
+                obstaculos[i].paint("gray");
 
-            contexto.fillStyle="gray"
-            contexto.fillRect(o_x,o_y, o_w, o_h);
+            }
+            player.paint("black");
+            target.paint("blue");
+            dir=0;
 
-            paintSquare();
             document.addEventListener("keydown", (e) => {
-
-                /*x=Math.floor(Math.random() * 500);
-                y=Math.floor(Math.random() * 500);*/
-                
-
-                //Arriba 87
-                //Abajo 83
-                //Izquierda 65
-                //Derecha 68
-
+             
                 switch(e.keyCode){
 
                     case 87: dir=1;
@@ -67,11 +84,6 @@
                     break;
 
                 }
-                //update();
-                paintSquare();
-                contexto.fillStyle="black"
-                contexto.fillRect(10,10,40,40);
-
 
             });
             
@@ -81,117 +93,114 @@
                     contexto.clearRect(0, 0, canvas.height, canvas.width);
 
             }
-            function paintSquare(){
-       
-                contexto.fillStyle=random_rgba();
-                contexto.fillRect(x,y,w,h)
-
-            }
             
             function update(){
 
                     if(dir==1){
 
 
-                        y-=10;
-                        if(y<0){
+                        player.y-=10;
+                        if(player.y<0){
 
-                            y=500;
+                            player.y=500;
 
                         }
 
 
                     }else if(dir==2){
 
-                        y+=10;
-                        if(y>500){
+                        player.y+=10;
+                        if(player.y>500){
 
-                            y=0;
+                            player.y=0;
 
                         }
 
                     }else if(dir==3){
 
-                        x-=10;
+                        player.x-=10;
                         
-                        if(x<0){
+                        if(player.x<0){
 
-                            x=500;
+                            player.x=500;
 
                         }
                     }
                     else if(dir==4){
 
-                        x+=10;
-                        if(x>500){
+                        player.x+=10;
+                        if(player.x>500){
 
-                            x=0;
+                            player.x=0;
 
                         }
 
                     }
 
                 resetCanvas();
-                paintSquare();
-                contexto.fillStyle="black"
-                contexto.fillRect(t_x,t_y,t_w,t_h);
-                
-                contexto.fillStyle="gray"
-                contexto.fillRect(o_x,o_y, o_w, o_h);
 
+                player.paint("black");
+                target.paint("blue"); 
+
+                for(var i=0; i<obstaculos.length; i++){
+
+                    obstaculos[i].paint("gray");
+
+                }             
 
                 window.requestAnimationFrame(update);
-                if(x < t_x + t_w &&  x + w > t_x &&    y < t_y + t_h &&    y + h > t_y){
+                if(player.detectarColision(target.x,target.y,target.w, target.h)){
 
-                    t_x=Math.floor(Math.random() * canvas.width);
-                    t_y=Math.floor(Math.random() * canvas.height);
+
+                    target.x= Math.floor(Math.random() * 500);
+                    target.y= Math.floor(Math.random() * 500);
+                    
+
+                }
+                for(var i=0; i<obstaculos.length; i++){
+
+                    if(player.detectarColision(obstaculos[i].x, obstaculos[i].y, obstaculos[i].w, obstaculos[i].h)){
+                        if(dir==1){
+                            player.y+=10;
+                            if(player.y<obstaculos[i].y){
+
+                                player.y=obstaculos[i].h;
+
+                            }
+                        }else if(dir==2){
+                            player.y-=10;
+                            if(player.y>obstaculos[i].h){
+
+                                player.y=obstaculos[i].y;
+
+                            }
+                        }else if(dir==3){
+                            player.x+=10;
+
+                            if(player.x<obstaculos[i].x){
+
+                                player.x=obstaculos[i].w;
+
+                            }
+                        }
+                        else if(dir==4){
+                            player.x-=10;
+                            if(player.x>obstaculos[i].w){
+
+                                player.x=obstaculos[i].x;
+
+                            }
+
+                        }
+
+                    }
+
+
+
+                    }
 
                 }
                 
-                if(x < o_x + o_w &&  x + w > o_x &&    y < o_y + o_h &&    y + h > o_y){ 
-                    if(dir==1){
-
-
-                        y+=10;
-                        if(y<o_y){
-
-                            y=o_h;
-
-                        }
-
-
-                    }else if(dir==2){
-
-                        y-=10;
-                        if(y>o_h){
-
-                            y=o_y;
-
-                        }
-
-                    }else if(dir==3){
-
-                        x+=10;
-                        
-                        if(x<o_x){
-
-                            x=o_w;
-
-                        }
-                    }
-                    else if(dir==4){
-
-                        x-=10;
-                        if(x>o_w){
-
-                            x=o_x;
-
-                        }
-
-                    }
-
-                }
-            }
             window.requestAnimationFrame = (function () {
                 return window.requestAnimationFrame ||
                     window.webkitRequestAnimationFrame ||
@@ -202,6 +211,8 @@
             }());
             window.requestAnimationFrame(update);
 
+
+            
             //FillStyle permite llenar el rectangulo con el color.
             //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
             
