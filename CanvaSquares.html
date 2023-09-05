@@ -25,6 +25,11 @@
             var canvas=document.getElementById('canvas');
             var contexto= canvas.getContext('2d');
             let pause= false;
+            let image= new Image();
+            image.src="abeja.png";
+
+            let audio= new Audio();
+            audio.src="sonido2.mp3";
             var score=0;
         
             //Creación de clase "Entidades", permitiendonos crear objetos rectangulares
@@ -89,6 +94,7 @@
             }
 
             player.paint("black");
+            contexto.drawImage(image,player.x,player.y,10,10);
             target.paint("blue");
             contexto.font = "40px Verdana";
             contexto.fillStyle="black"
@@ -181,7 +187,8 @@
                 }
                 resetCanvas();
 
-                player.paint("black");
+                //player.paint("black");
+                contexto.drawImage(image,player.x,player.y,60,60);
                 target.paint("blue"); 
                 contexto.font = "15px Verdana";
                 contexto.fillStyle="black"
@@ -200,6 +207,7 @@
                     target.x= Math.floor(Math.random() * 500);
                     target.y= Math.floor(Math.random() * 500);
                     score+=10;
+                    audio.play();
                     
 
                 }
