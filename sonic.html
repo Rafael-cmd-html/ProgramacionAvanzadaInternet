@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>Sonic</title> 
+        <style>
+
+            #canvas{
+
+                border: 1px solid black 
+                
+            }
+    
+        </style>
+
+
+    </head>
+
+    <body>
+        
+         <canvas id="canvas" width="900" height="500"></canvas>
+         <script>
+
+            var canvas=document.getElementById('canvas');
+                
+            var contexto= canvas.getContext('2d');
+
+            contexto.fillStyle = "#4C75EE";
+            contexto.fillRect(0, 0, canvas.width, canvas.height);
+
+            crearRectangulos();
+            
+            function crearRectangulos(x,y,w,h,color){
+
+                contexto.fillStyle=color;
+                contexto.fillRect(x,y,w,h,color);
+
+            }
+
+         </script>
+        
+
+
+    </body>
+
+</html>

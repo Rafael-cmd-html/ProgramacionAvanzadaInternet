@@ -18,15 +18,18 @@
 
 
         <canvas id="canvas" width="500" height="500"></canvas>
-        <img  style="display: none;" src="konkun.png" id="my_image">
         <script>
 
+            //Creación de variables para el contexto y canvas, así como creación de la variable pause
+
             var canvas=document.getElementById('canvas');
-    
             var contexto= canvas.getContext('2d');
             let pause= false;
-            class Entidades {
+            var score=0;
+        
+            //Creación de clase "Entidades", permitiendonos crear objetos rectangulares
 
+            class Entidades {
                 x;
                 y;
                 w;
@@ -39,12 +42,18 @@
                     this.h=h;
 
                 }   
+
+                //Función para pintar la entidad
+
                 paint(color){
 
                     contexto.fillStyle=color;
                     contexto.fillRect(this.x,this.y,this.w,this.h);
 
                 }
+
+                //Función de choque
+
                 detectarColision(t_x, t_y, t_w, t_h){
 
                     if(this.x < t_x + t_w  &&  this.x + this.w > t_x &&    this.y < t_y + t_h  &&  this.y + this.h > t_y) {
@@ -56,34 +65,50 @@
 
             }
 
+            //Creación de entidades para el juego
+
+            //Jugador y objetivo
+
             player= new Entidades(250,250,60,60);
             target= new Entidades(200,250,30,30);
+
+            //Arreglo de muros
+
             let obstaculos = [];
             obstaculos.push(new Entidades(50, 90, 400, 30));
             obstaculos.push(new Entidades(50, 350, 400, 30));
+
+            //Pantalla de pausa
+
+            pantallaPausa= new Entidades(0,0,500,500);
 
             for(var i=0; i<obstaculos.length; i++){
 
                 obstaculos[i].paint("gray");
 
             }
+
             player.paint("black");
             target.paint("blue");
+            contexto.font = "40px Verdana";
+            contexto.fillStyle="black"
+            contexto.fillText("Score: "+score,10,10);
+            
             dir=0;
 
             document.addEventListener("keydown", (e) => {
              
                 switch(e.keyCode){
 
-                    case 87: dir=1;
+                    case 87:  dir=1;
                     break;
-                    case 83: dir=2;
+                    case 83:  dir=2;
                     break;
                     case 65: dir=3;
                     break;
-                    case 68: dir=4;
+                    case 68:  dir=4;
                     break;
-                    case 32: dir=5;
+                    case 32: pause= !pause;
                     break;
 
                 }
@@ -93,7 +118,18 @@
             
             function resetCanvas(){
 
-                    contexto.clearRect(0, 0, canvas.height, canvas.width);
+                    if(!pause){
+
+                        contexto.clearRect(0, 0, canvas.height, canvas.width);
+
+                    }else{
+
+                        pantallaPausa.paint("rgba(192,186,179,0.5)");
+                        contexto.font = "50px Verdana";
+                        contexto.fillStyle="black"
+                        contexto.fillText("PAUSE",170,230);
+
+                    }
 
             }
             
@@ -142,10 +178,14 @@
 
                     }
 
+                }
                 resetCanvas();
 
                 player.paint("black");
                 target.paint("blue"); 
+                contexto.font = "15px Verdana";
+                contexto.fillStyle="black"
+                contexto.fillText("Score: "+score,10,30);
 
                 for(var i=0; i<obstaculos.length; i++){
 
@@ -159,6 +199,7 @@
 
                     target.x= Math.floor(Math.random() * 500);
                     target.y= Math.floor(Math.random() * 500);
+                    score+=10;
                     
 
                 }
@@ -201,10 +242,6 @@
                     }
 
                   }
-                }else{
-
-
-                }
 
             }
                 
@@ -217,146 +254,6 @@
                     };
             }());
             window.requestAnimationFrame(update);
-
-
-            
-            //FillStyle permite llenar el rectangulo con el color.
-            //FillRect da propiedades al rectangulo ajenas al color (Altura, ancho y coordenadas).
-            
-            /*
-            var figura= true;
-
-            var press= false;
-
-            canvas.addEventListener("click", (e) => {
-
-                if(figura)
-                {
-
-                    contexto.beginPath();
-                    contexto.arc(e.layerX, e.layerY, 40, 0, 2 * Math.PI);
-                    contexto.fill();
-                    contexto.closePath();
-
-                }else{
-
-                    contexto.fillRect(e.layerX-50,e.layerY-50,60,65);
-
-                }
-
-            })
-
-            canvas.addEventListener("mouseover",(e)=>{
-
-                color= random_rgba();
-                contexto.fillStyle=color;
-
-            })
-
-            canvas.addEventListener("mouseout", (e)=> {
-
-                figura=!figura;
-
-            })
-
-            canvas.addEventListener("mousemove", (e)=>{
-
-                if(press){
-
-                    contexto.beginPath();
-                    contexto.arc(e.layerX, e.layerY, 2, 0, 2 * Math.PI);
-                    contexto.stroke();
-                    contexto.closePath();
-
-                }
-
-            })
-            canvas.addEventListener("mousedown", (e)=>{
-
-                press=true;
-
-            })
-            canvas.addEventListener("mouseup", (e)=>{
-
-                press=false;
-
-            })
-            */
-
-            /*
-            contexto.fillStyle="#A22F16";
-            contexto.fillRect(10,10,30,15);
-    
-            contexto.fillStyle="#3F8810";
-            contexto.fillRect(30,20,30,15);
-    
-            contexto.fillStyle="#107088";
-            contexto.fillRect(55,30,30,15); 
-    
-            //Creación de triangulo y linea
-    
-            contexto.moveTo(50,100);
-            contexto.lineTo(125,65);
-            contexto.strokeStyle="red";
-            contexto.stroke();
-    
-            //-------
-            // Prueba de gitDesktop.
-    
-            contexto.strokeStyle = "#212121";
-            contexto.fillStyle = "green";
-    
-            contexto.moveTo(200, 50);
-            contexto.lineTo(200, 100);
-            contexto.lineTo(250, 100);
-    
-            contexto.closePath();
-            contexto.stroke();
-            contexto.fill();
-    
-            //Creación de circulos
-    
-            contexto.beginPath();
-            contexto.arc(70, 130, 15, 0, 2 * Math.PI);
-            contexto.stroke();
-            contexto.closePath();
-            
-            contexto.beginPath();
-            contexto.arc(120, 130, 15, 0, 2 * Math.PI);
-            contexto.fillStyle="blue";
-            contexto.fill();
-            contexto.closePath();
-    
-            //Filltext 
-            contexto.beginPath();
-            contexto.fillStyle="black";
-            contexto.font= "10px Arial";
-            contexto.fillText("Hola mundo",100,50);
-    
-            contexto.strokeStyle="red";
-            contexto.strokeText("Hola mundo", 103,53);
-    
-            //Gradiant
-            var grd = contexto.createLinearGradient(0, 0, 300, 0);
-            grd.addColorStop(0, "black");
-            grd.addColorStop(1, "red");
-    
-            // Draw a filled Rectangle
-            contexto.fillStyle = grd;
-            contexto.fillRect(180,110,200,110);
-            //RadioGradiant
-            var grd2 = contexto.createRadialGradient(75, 170, 5, 90, 170, 80);
-            grd2.addColorStop(0, "blue");
-            grd2.addColorStop(1, "white");
-    
-    
-            contexto.fillStyle = grd2;
-            contexto.fillRect(10, 110, 150, 110);
-    
-            //Imagen
-            var img = document.getElementById("my_image");
-            contexto.drawImage(img, 10, 250);
-            */
         </script>
 
     </body>
