@@ -33,6 +33,38 @@
         <!- Invocamos la funcion con el h1 y creamos un botón para realizar la acción -->
         <input type="button" v-on:click="suma" value="Sumar"> <br/> <br/>
         <h1> {{  resultado }}</h1>
+
+        <hr>
+
+        <!- Form nos crea un formulario donde damos dos textfield con un nombre, al igual que un botón -->
+        <form>
+
+            <fieldset>
+                <legend>Nombre</legend>
+
+                <!- Los input los creamos como v-model para que mandemos los valores a las variables de la función -->
+
+                <input v-model="nombre" type="text">
+            </fieldset>
+
+            <fieldset>
+                <legend>Apellido(s)</legend>
+                <input v-model="apellido" type="text">
+            </fieldset>
+            <hr>
+            <input type="button" v-on:click="addPerson" value="Añadir persona">
+
+            <ul>
+
+                <li v-for="item in persons">
+
+                    {{item.name}} - {{item.lastName}}
+
+                </li>
+
+            </ul>
+
+        </form>
        
     </div>
     
@@ -49,7 +81,10 @@
                 //Declaramos nuestras variables para los valores
                 valorA:0,
                 valorB:0,
-                resultado:""
+                resultado:"",
+                nombre:"",
+                apellido:"",
+                persons:[],
 
             }, 
 
@@ -63,6 +98,16 @@
                     //Hacemos que nos retorne el resultado
                     mensaje="La suma de sus valores es: "+(this.valorA + this.valorB);
                     this.resultado=mensaje;
+
+                },
+                //Nueva función, para añadir personas a una lista
+                addPerson: function(event){
+
+                    let person={
+                        name:this.nombre,
+                        lastName: this.apellido
+                    }
+                    this.persons.push(person);
 
                 }
 
