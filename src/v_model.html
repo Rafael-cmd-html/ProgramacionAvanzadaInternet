@@ -11,6 +11,31 @@
 
     <! -Vinculamos al cdn de vue -->
 
+    <style type="text/css">
+
+        table.customTable {
+                    width: 100%;
+                    background-color: #FFFFFF;
+                    border-collapse: collapse;
+                    border-width: 2px;
+                    border-color: #9AD9F8;
+                    border-style: dotted;
+                    color: #FF0000;
+                }
+                
+                table.customTable td, table.customTable th {
+                    border-width: 2px;
+                    border-color: #9AD9F8;
+                    border-style: dotted;
+                    padding: 10px;
+                }
+                
+                table.customTable thead {
+                    background-color: #45C2F8;
+                }
+
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
 </head>
@@ -24,7 +49,7 @@
 
 
         <!- Form nos crea un formulario donde damos dos textfield con un nombre, al igual que un botón -->
-        <form>
+        <form v-if="!is_login">
 
             <fieldset>
 
@@ -43,7 +68,20 @@
             <input type="button" v-on:click="login" value="Entrar">
 
         </form>
-       
+        <table class="customTable" v-if="is_login">
+          <thead>
+            <tr>
+              <th>Personal data</th>
+              <th>Contact data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="u in usuarios">
+              <td>{{u.name}}</td>
+              <td>{{u.email}}</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
     
     <script type="text/javascript">
@@ -60,6 +98,8 @@
                 password: "",
                 email: "",
                 usuarios:[],
+                is_login: false,
+
 
             }, 
 
@@ -70,12 +110,22 @@
 
                 async login(){
 
-                    const response= await fetch("users.json");
-                    const users_r= await response.json();
+                    
+                    let temp=localStorage.getItem("is_login");
+                    is_login=temp; 
 
-                    console.log(users_r);
+                    if(temp===null){
+
+                        temp=false;
+
+                    }
+                    
+                    const response= await fetch("users.json");
+                    this.usuarios= await response.json();
+
+                    console.log(this.usuarios);
                     let cont=0;
-                    users_r.forEach((user) => {
+                   this.usuarios.forEach((user) => {
 
                         if(user.email === this.email){
 
@@ -83,6 +133,8 @@
                             if(user.password === this.password){
                                 
                                 cont+=1;
+                                localStorage.setItem("user_data", JSON.stringify(user));
+                                localStorage.setItem("is_login","true");
 
                             }
 
@@ -91,15 +143,22 @@
                     });
                     switch(cont){
 
-                        case 0: console.log("Correo incorrecto"); 
+                        case 0: 
+                            alert("Correo incorrecto"); 
+                            this.temp=false
                         break;
-                        case 1: console.log("Contraseña incorrecta");
+                        case 1:
+                            this.temp=false; 
+                            alert("Contraseña incorrecta");
                         break;
-                        case 2: console.log("Bienvenido");
+                        case 2:  
+                            this.is_login=true;
+                            alert("Bienvenido")
+                        break;
 
                     }
 
-                }
+                },
 
             },
 
