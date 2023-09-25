@@ -18,20 +18,20 @@
                     background-color: #FFFFFF;
                     border-collapse: collapse;
                     border-width: 2px;
-                    border-color: #9AD9F8;
+                    border-color: #FEC1C1;
                     border-style: dotted;
-                    color: #FF0000;
+                    color: #14919D;
                 }
                 
                 table.customTable td, table.customTable th {
                     border-width: 2px;
-                    border-color: #9AD9F8;
+                    border-color: #FEC1C1;;
                     border-style: dotted;
                     padding: 10px;
                 }
                 
                 table.customTable thead {
-                    background-color: #45C2F8;
+                    background-color: #FEC1C1;
                 }
 
     </style>
@@ -68,20 +68,66 @@
             <input type="button" v-on:click="login" value="Entrar">
 
         </form>
-        <table class="customTable" v-if="is_login">
-          <thead>
-            <tr>
-              <th>Personal data</th>
-              <th>Contact data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="u in usuarios">
-              <td>{{u.name}}</td>
-              <td>{{u.email}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div v-if="is_login">
+            <table class="customTable">
+            <thead>
+                <tr>
+                <th>Personal data</th>
+                <th>Contact data</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="u in usuarios">
+                <td>{{u.name}}</td>
+                <td>{{u.email}}</td>
+                <td>
+                    <button @click="edit(u)">
+                        Edit
+                    </button>
+                    <button @click="remove(usuarios.id)">
+                        Remove
+                    </button>
+
+                </td>
+                </tr>
+            </tbody>
+            </table>
+            <br>
+            <button v-on:click="add">
+                Add record
+            </button>
+            <br><br><br><br>
+            <div class="rendered-form" v-if="action == 'add'">
+                
+                <h1 access="false" id="control-">Añadir usuario</h1>
+                <div class="formbuilder-text form-group field-text-">
+                    <label for="text-" class="formbuilder-text-label">Name</label>
+                    <input v-model="new_user.name"type="text" class="form-control" name="text-" access="false" id="text-">
+                </div><br><br>
+                <div class="formbuilder-text form-group field-text-">
+                    <label for="text-" class="formbuilder-text-label">Email</label>
+                    <input v-model="new_user.email"type="text" class="form-control" name="text-" access="false" id="text-">
+                </div><br>
+                <div class="formbuilder-button form-group field-button-">
+                    <button type="button" @click="save('create')"class="btn-default btn" name="button-" access="false" style="default" id="button-">Save user</button>
+                </div>
+            </div> <div class="rendered-form" v-if="action == 'edit'">
+                
+                <h1 access="false" id="control-">Editar usuario</h1>
+                <div class="formbuilder-text form-group field-text-">
+                    <label for="text-" class="formbuilder-text-label">Name</label>
+                    <input v-model="new_user.name"type="text" class="form-control" name="text-" access="false" id="text-">
+                </div><br><br>
+                <div class="formbuilder-text form-group field-text-">
+                    <label for="text-" class="formbuilder-text-label">Email</label>
+                    <input v-model="new_user.email"type="text" class="form-control" name="text-" access="false" id="text-">
+                </div><br>
+                <div class="formbuilder-button form-group field-button-">
+                    <button type="button" @click="save('update')"class="btn-default btn" name="button-" access="false" style="default" id="button-">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script type="text/javascript">
@@ -99,6 +145,8 @@
                 email: "",
                 usuarios:[],
                 is_login: false,
+                action: "",
+                new_user: [],
 
 
             }, 
@@ -159,6 +207,59 @@
                     }
 
                 },
+                add(){
+                    this.action='add';
+
+                },
+                edit(u){
+                    this.action='edit';
+                    this.new_user.name= u.name;
+                    this.new_user.email= u.email;
+                    this.new_user.id=u.id;
+                },
+                save(action){
+
+                    if(action=='create'){
+                            
+                        this.usuarios.push(this.new_user);
+                        alert("Se añadió el nuevo usuario");
+                        this.new_user=[];
+                    }
+                    if(action=='update'){
+
+                        this.usuarios.forEach(user=>{
+
+                            if(user.id==this.new_user.id){
+
+                                user.name=this.new_user.name;
+                                user.email=this.new_user.email;
+
+                            }
+
+                        })
+                        this.new_user=[];
+
+                    }
+                    this.action='';
+                    
+                },
+                remove(id){
+                    let c=0;
+                    let i=0;
+                    this.usuarios.forEach(user=>{
+
+                        if(user.id==id){
+
+                            i=c;
+
+                        }
+
+                        c++;
+
+                    })
+                    this.usuarios.splice(i,1);
+
+                }
 
             },
 

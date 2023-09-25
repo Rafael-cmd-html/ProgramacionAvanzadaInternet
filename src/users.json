@@ -1,6 +1,7 @@
 [
 
     {
+        "id":  1,
         "name":"Rafael",
         "last_name":"Castillejos",
         "email": "armando@gmail.com",
@@ -9,6 +10,7 @@
         "avatar":""
     },   
     {
+        "id":  2,
         "name":"Jorge",
         "last_name":"Barajas",
         "email": "Jorge@gmail.com",
